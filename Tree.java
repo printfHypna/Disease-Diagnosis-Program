@@ -5,11 +5,11 @@ import java.util.List;
 
 class DiseaseNode {
     String disease;
-    List<String> symptoms;
+    ArrayList<String> symptoms;
     DiseaseNode left;
     DiseaseNode right;
 
-    public DiseaseNode(String disease, List<String> symptoms) {
+    public DiseaseNode(String disease, ArrayList<String> symptoms) {
         this.disease = disease;
         this.symptoms = symptoms;
         this.left = null;
@@ -24,11 +24,11 @@ class DiseaseTree {
         this.root = null;
     }
 
-    public void insert(String disease, List<String> symptoms) {
+    public void insert(String disease, ArrayList<String> symptoms) {
         root = insertRecursive(root, disease, symptoms);
     }
 
-    private DiseaseNode insertRecursive(DiseaseNode current, String disease, List<String> symptoms) {
+    private DiseaseNode insertRecursive(DiseaseNode current, String disease, ArrayList<String> symptoms) {
         if (current == null) {
             return new DiseaseNode(disease, symptoms);
         }
@@ -43,13 +43,13 @@ class DiseaseTree {
         return current;
     }
     
-    public List<String> searchBySymptoms(List<String> symptoms) {
-        List<String> diseases = new ArrayList<>();
+    public ArrayList<String> searchBySymptoms(ArrayList<String> symptoms) {
+        ArrayList<String> diseases = new ArrayList<>();
         searchBySymptomsRecursive(root, symptoms, diseases);
         return diseases;
     }
 
-    private void searchBySymptomsRecursive(DiseaseNode current, List<String> symptoms, List<String> diseases) {
+    private void searchBySymptomsRecursive(DiseaseNode current, ArrayList<String> symptoms, ArrayList<String> diseases) {
         if (current != null) {
             searchBySymptomsRecursive(current.left, symptoms, diseases);
             if (current.symptoms.containsAll(symptoms)) {
@@ -75,4 +75,6 @@ class DiseaseTree {
             displayInOrderRecursive(current.right);
         }
     }
+    
+    
 }
