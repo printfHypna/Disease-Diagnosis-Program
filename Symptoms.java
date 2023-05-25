@@ -24,9 +24,9 @@ public class Symptoms extends JFrame implements MouseListener{
 	public Symptoms(String username) {
 		
 		this.username = username;
-		String capname = username.substring(0, 1).toUpperCase()
-				+ username.substring(1).toLowerCase();
-		System.out.println(capname);
+//		String capname = username.substring(0, 1).toUpperCase()
+//				+ username.substring(1).toLowerCase();
+//		System.out.println(capname);
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(400,700);
 		
@@ -34,7 +34,7 @@ public class Symptoms extends JFrame implements MouseListener{
 		setTitle("Disease Diagnosis Program");
 		
 		setLayout(new GridLayout(6,1)); 
-		add(new JLabel("CHOOSE THE AREA WHERE YOU FEEL PAIN " + capname));
+		add(new JLabel("CHOOSE THE AREA WHERE YOU FEEL PAIN " + username));
 		
 		add(btnHead);
 		add(btnChest);
@@ -51,39 +51,30 @@ public class Symptoms extends JFrame implements MouseListener{
 		
 	}
 	
-
-//	public static void main(String[] args) {
-//		new Symptoms().setVisible(true);
-//		
-//	}
-	
-
-	Head hd= new Head();
-	Chest ca= new Chest();
-	Back bck= new Back();
-	Abdomen abd= new Abdomen();
-	Leg lg= new Leg();
-
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(e.getSource() == btnHead)
-		{
-	     hd.setVisible(true);
-	     
+		if(e.getSource() == btnHead) {
+			Head hd= new Head(username);
+		    hd.setVisible(true);
 		}
+
 		else if(e.getSource() == btnChest) {
+		    Chest ca= new Chest();
 			ca.setVisible(true);
 		}
 		
 		else if(e.getSource() == btnBack) {
+			Back bck= new Back();
 			bck.setVisible(true);
 		}
 		
 		else if(e.getSource() == btnAbdomen) {
+			Abdomen abd= new Abdomen();
 			abd.setVisible(true);
 		}
 		
 		else if(e.getSource() == btnLeg) {
+			Leg lg= new Leg();
 			lg.setVisible(true);
 		}
 		
