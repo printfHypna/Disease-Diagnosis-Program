@@ -27,6 +27,7 @@ public class Login extends JFrame implements MouseListener{
 	
 	
 	public Login() {
+		
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(300,150);
 		
@@ -50,14 +51,23 @@ public class Login extends JFrame implements MouseListener{
 //		
 //	}
 	
-	
+	String username;
 	public void mouseClicked(MouseEvent e) {
 		if(e.getSource() == btnNext)
 		{
-	     Symptoms sy = new Symptoms(txtNMAndSrnm.getText());
+		 username = txtNMAndSrnm.getText();
+	     Symptoms sy = new Symptoms(username);
 	     sy.setVisible(true);
 		}
 		
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	@Override
