@@ -17,7 +17,11 @@ public class Head extends JFrame implements MouseListener{
 	JButton btnHairyArea = new JButton("HAIRY AREA");
 	JButton btnEye = new JButton("EYE");
 	
-	public Head() {
+	private String username;
+	
+	public Head(String username) {
+		
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(400,700);
 		
@@ -42,7 +46,7 @@ public class Head extends JFrame implements MouseListener{
 //		
 //	}
 	
-	Nose ns= new Nose();
+	Nose ns= new Nose(username);
 	
 
 	
