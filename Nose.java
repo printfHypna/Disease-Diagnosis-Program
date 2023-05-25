@@ -3,6 +3,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
@@ -24,9 +25,12 @@ public class Nose extends JFrame implements MouseListener{
 	JCheckBox chkNasalCongestion = new JCheckBox("NASAL CONGESTION");
 	
 	JCheckBox chkSneeze = new JCheckBox("SNEEZE");
-
 	
-	public Nose() {
+	private String username;
+	
+	public Nose(String username) {
+		
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(400,700);
 		
@@ -34,8 +38,11 @@ public class Nose extends JFrame implements MouseListener{
 		setTitle("Disease Diagnosis Program");
 		
 		JPanel pnlNose = new JPanel(new GridLayout(4,1));
+		
 		pnlNose.add(chkRunnyNose); pnlNose.add(chkRsos);
 		pnlNose.add(chkNasalCongestion);pnlNose.add(chkSneeze);
+		
+		
 		
 		setLayout(new GridLayout(5,1)); 
 		add(new JLabel("NOSE"));
@@ -46,30 +53,28 @@ public class Nose extends JFrame implements MouseListener{
 		btnSubmit.addMouseListener(this);
 		
 	}
-
-
+	
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnSubmit) {
-            ArrayList<String> selectedOptions = new ArrayList<>();
-            
-         // Get all the components within the pnlNose panel
-            Component[] components = pnlNose.getComponents();
-
-            // Iterate over the components
-            for (Component component : components) {
-                if (component instanceof JCheckBox) {
-                    JCheckBox checkBox = (JCheckBox) component;
-                    if (checkBox.isSelected()) {
-                        selectedOptions.add(checkBox.getText());
-                    }
-                }
-            }
-
-            System.out.println("Selected Options: " + selectedOptions);
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkRunnyNose); allCheckBoxes.add(chkRsos);
+			allCheckBoxes.add(chkNasalCongestion); allCheckBoxes.add(chkSneeze);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			Results r = new Results(username, selectedCheckBoxes);
+			r.setVisible(true);
+		
         } 
 			
 	}
+	 public ArrayList<String> getSelectedCheckBoxes() {
+	        return selectedCheckBoxes;
+	    }
 
 
 	@Override
