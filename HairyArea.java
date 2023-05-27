@@ -1,7 +1,8 @@
-package arayüzgeliþtirme;
+package arayÃ¼zgeliÅŸtirme;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -28,7 +29,12 @@ public class HairyArea extends JFrame implements MouseListener {
 	JCheckBox chkFP = new JCheckBox("FACIAL PAIN");
 	
 	JCheckBox chkLJ = new JCheckBox("LOCKJAW");
-	public HairyArea() {
+	
+	private String username;
+	
+	
+	public HairyArea(String username) {
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
 		setSize(400,700);
 		
@@ -44,15 +50,36 @@ public class HairyArea extends JFrame implements MouseListener {
 		add(new JLabel("(You can choose one or more options.)"));
 		add(pnlHairyArea);
 		add(btnSubmit);
+		btnSubmit.addMouseListener(this);
 	
 	
 	
 	}
+	
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == btnSubmit) {
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkIB); allCheckBoxes.add(chkITC);
+			allCheckBoxes.add(chkBI); allCheckBoxes.add(chkCG);allCheckBoxes.add(chkCKS);allCheckBoxes.add(chkFP);allCheckBoxes.add(chkLJ);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			Results r = new Results(username, selectedCheckBoxes);
+			r.setVisible(true);
+		
+        } 
+		
 		// TODO Auto-generated method stub
 		
 	}
+	public ArrayList<String> getSelectedCheckBoxes() {
+        return selectedCheckBoxes;
+    }
+
 
 	@Override
 	public void mousePressed(MouseEvent e) {
