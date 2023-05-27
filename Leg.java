@@ -1,4 +1,4 @@
-package main;
+package arayüzgeliþtirme;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
