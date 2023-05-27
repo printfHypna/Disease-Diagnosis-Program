@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 class DiseaseNode {
     String disease;
+    String diseasedesc;
     ArrayList<String> symptoms;
     DiseaseNode left;
     DiseaseNode right;
 
-    public DiseaseNode(String disease, ArrayList<String> symptoms) {
+    public DiseaseNode(String disease, ArrayList<String> symptoms, String diseasedesc) {
         this.disease = disease;
+        this.diseasedesc = diseasedesc;
         this.symptoms = symptoms;
         this.left = null;
         this.right = null;
@@ -23,20 +25,23 @@ class DiseaseTree {
         this.root = null;
     }
 
-    public void insert(String disease, ArrayList<String> symptoms) {
-        root = insertRecursive(root, disease, symptoms);
+    public void insert(String disease, ArrayList<String> symptoms, String diseasedesc) {
+        root = insertRecursive(root, disease, symptoms, diseasedesc);
     }
 
-    private DiseaseNode insertRecursive(DiseaseNode current, String disease, ArrayList<String> symptoms) {
+    private DiseaseNode insertRecursive(DiseaseNode current, String disease,
+    		ArrayList<String> symptoms, String diseasedesc) {
         if (current == null) {
-            return new DiseaseNode(disease, symptoms);
+            return new DiseaseNode(disease, symptoms, diseasedesc);
         }
 
         // Assuming diseases are stored in alphabetical order
         if (disease.compareToIgnoreCase(current.disease) < 0) {
-            current.left = insertRecursive(current.left, disease, symptoms);
+            current.left = insertRecursive(current.left, disease, symptoms,
+            		diseasedesc);
         } else if (disease.compareToIgnoreCase(current.disease) > 0) {
-            current.right = insertRecursive(current.right, disease, symptoms);
+            current.right = insertRecursive(current.right, disease, symptoms,
+            		diseasedesc);
         }
 
         return current;
