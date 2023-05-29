@@ -66,8 +66,10 @@ public class Nose extends JFrame implements MouseListener{
 					selectedCheckBoxes.add(jCheckBox.getText());
 				}
 			}
-			Results r = new Results(username, selectedCheckBoxes);
-			r.setVisible(true);
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+			}
 		
         } 
 			
