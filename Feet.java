@@ -1,7 +1,8 @@
-package arayüzgeliþtirme;
+package main;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -20,17 +21,19 @@ public class Feet extends JFrame implements MouseListener {
 
 	JCheckBox chkITC= new JCheckBox("TENDERNESS");
 
-	JCheckBox chkBI = new JCheckBox("INFLAMATION");
+	JCheckBox chkBI = new JCheckBox("INFLAMMATION");
 	
-	JCheckBox chkCG = new JCheckBox("RED SKÝN");
+	JCheckBox chkCG = new JCheckBox("RED SKï¿½N");
 	JCheckBox chkCKS= new JCheckBox("SUDDEN INTENSE PAIN IN THE FOOT");
 
 	JCheckBox chkFP = new JCheckBox("GOUT ATTACKS");
 	
 	JCheckBox chkLJ = new JCheckBox("ITCHING, BURNING AND STINGING SENSATION BETWEEN TOES");
-	public Feet() {
+	private String username;
+	public Feet(String username) {
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -44,15 +47,38 @@ public class Feet extends JFrame implements MouseListener {
 		add(new JLabel("(You can choose one or more options.)"));
 		add(pnlHairyArea);
 		add(btnSubmit);
+		btnSubmit.addMouseListener(this);
 	
 	
 	
 	}
+	
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == btnSubmit) {
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkIB); allCheckBoxes.add(chkITC);
+			allCheckBoxes.add(chkBI); allCheckBoxes.add(chkCG);allCheckBoxes.add(chkCKS);allCheckBoxes.add(chkFP);allCheckBoxes.add(chkLJ);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+				dispose();
+			}
+		
+        } 
+		
 		// TODO Auto-generated method stub
 		
 	}
+	public ArrayList<String> getSelectedCheckBoxes() {
+        return selectedCheckBoxes;
+    }
 
 	@Override
 	public void mousePressed(MouseEvent e) {
