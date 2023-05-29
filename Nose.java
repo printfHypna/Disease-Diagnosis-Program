@@ -32,7 +32,7 @@ public class Nose extends JFrame implements MouseListener{
 		
 		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -52,9 +52,11 @@ public class Nose extends JFrame implements MouseListener{
 		add(btnSubmit);
 		btnSubmit.addMouseListener(this);
 		
+		
 	}
 	
 	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == btnSubmit) {
@@ -69,8 +71,8 @@ public class Nose extends JFrame implements MouseListener{
 			if(selectedCheckBoxes.isEmpty() == false) {
 				Results r = new Results(username, selectedCheckBoxes);
 				r.setVisible(true);
+				dispose();
 			}
-		
         } 
 			
 	}
