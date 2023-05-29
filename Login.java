@@ -43,6 +43,7 @@ public class Login extends JFrame implements MouseListener{
 		btnNext.addMouseListener(this);
 		
 		
+		
 	}
 	
 
@@ -58,6 +59,7 @@ public class Login extends JFrame implements MouseListener{
 		 username = txtNMAndSrnm.getText();
 	     Symptoms sy = new Symptoms(username);
 	     sy.setVisible(true);
+	     dispose(); // Close the Login window
 		}
 		
 	}
