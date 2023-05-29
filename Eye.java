@@ -1,7 +1,8 @@
-package arayüzgeliþtirme;
+package main;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -27,9 +28,14 @@ public class Eye extends JFrame implements MouseListener{
 	JCheckBox chkFP = new JCheckBox("LIGHT SENSIVITY");
 	
 	JCheckBox chkLJ = new JCheckBox("EYE FATIGUE");
-	public Eye() {
+	
+	
+	private String username;
+	
+	public Eye(String username) {
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -43,12 +49,34 @@ public class Eye extends JFrame implements MouseListener{
 		add(new JLabel("(You can choose one or more options.)"));
 		add(pnlHairyArea);
 		add(btnSubmit);
+		btnSubmit.addMouseListener(this);
 	}
+	
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (e.getSource() == btnSubmit) {
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkIB); allCheckBoxes.add(chkITC);
+			allCheckBoxes.add(chkBI); allCheckBoxes.add(chkCG);allCheckBoxes.add(chkCKS);allCheckBoxes.add(chkFP);allCheckBoxes.add(chkLJ);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+				dispose();
+			}
 		
+        } 
+		
+	}
+	
+	public ArrayList<String> getSelectedCheckBoxes() {
+        return selectedCheckBoxes;
 	}
 
 	@Override
