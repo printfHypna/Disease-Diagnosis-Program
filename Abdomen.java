@@ -16,11 +16,11 @@ public class Abdomen extends JFrame implements MouseListener {
 	JButton btnStomach = new JButton("STOMACH");
 	JButton btnLowerStomach = new JButton("LOWER STOMACH");
 	JButton btnUpperStomach = new JButton("UPPER STOMACH");
+	private String username;
 	
-	
-	public Abdomen() {
+	public Abdomen(String username) {
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -32,16 +32,37 @@ public class Abdomen extends JFrame implements MouseListener {
 		add(btnLowerStomach);
 		add(btnUpperStomach);
 		
-		
+		btnStomach.addMouseListener(this);
+		btnLowerStomach.addMouseListener(this);
+		btnUpperStomach.addMouseListener(this);
 		
 		
 	}
 
-	
+	Stomach ns= new Stomach(username);
+	LowerStomach ha= new LowerStomach(username);
+	UpperStomach ey= new UpperStomach(username);
+
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == btnStomach)
+		{
+	     ns.setVisible(true);
+	     dispose();
+		}
+		
+		else if(e.getSource() == btnLowerStomach)
+		{
+	     ha.setVisible(true);
+	     dispose();
+		}
+		else if(e.getSource() == btnUpperStomach)
+		{
+	     ey.setVisible(true);
+	     dispose();
+		}
+		
 		
 	}
 
