@@ -24,7 +24,7 @@ class DiseaseTree {
     public DiseaseTree() {
         this.root = null;
     }
-
+    
     public void insert(String disease, ArrayList<String> symptoms, String diseasedesc) {
         root = insertRecursive(root, disease, symptoms, diseasedesc);
     }
@@ -46,7 +46,8 @@ class DiseaseTree {
 
         return current;
     }
-     	// Disease description
+    
+    	// Disease description
     public String getDiseaseDescription(String diseaseName) {
         return getDiseaseDescriptionRecursive(root, diseaseName);
     }
@@ -65,6 +66,8 @@ class DiseaseTree {
             return getDiseaseDescriptionRecursive(current.right, diseaseName);
         }
     }
+
+    
     
     public ArrayList<String> searchBySymptoms(ArrayList<String> symptoms) {
         ArrayList<String> diseases = new ArrayList<>();
@@ -84,7 +87,6 @@ class DiseaseTree {
             searchBySymptomsRecursive(current.right, symptoms, diseases);
         }
     }
-
 
     public void displayInOrder() {
         displayInOrderRecursive(root);
