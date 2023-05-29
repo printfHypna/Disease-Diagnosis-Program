@@ -1,4 +1,4 @@
-package arayüzgeliþtirme;
+package main;
 
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -17,10 +17,10 @@ public class Leg extends JFrame implements MouseListener {
 	JButton btnKneecap = new JButton("KNEECAP");
 	JButton btnUpperLeg = new JButton("UPPER LEG");
 	
-	
-	public Leg() {
+	private String username;
+	public Leg(String username) {
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -32,16 +32,38 @@ public class Leg extends JFrame implements MouseListener {
 		add(btnKneecap);
 		add(btnUpperLeg);
 		
-		
+		btnFeet.addMouseListener(this);
+		btnKneecap.addMouseListener(this);
+		btnUpperLeg.addMouseListener(this);
 		
 		
 	}
+	
+	Feet ft= new Feet(username);
+	Kneecap kc = new Kneecap(username);
+	UpperLeg ul = new UpperLeg(username);
 
 	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == btnFeet)
+		{
+	     ft.setVisible(true);
+	     dispose();
+		}
+		
+		else if(e.getSource() == btnKneecap)
+		{
+	     kc.setVisible(true);
+	     dispose();
+		}
+		else if(e.getSource() == btnUpperLeg)
+		{
+	     ul.setVisible(true);
+	     dispose();
+		}
+		
 		
 	}
 
