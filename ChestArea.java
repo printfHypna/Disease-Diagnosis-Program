@@ -1,7 +1,8 @@
-package arayüzgeliþtirme;
+package main;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -17,9 +18,9 @@ public class ChestArea extends JFrame implements MouseListener{
 	JTextField txtHSA = new JTextField();
 	JCheckBox chkIB = new JCheckBox("CHEST PAIN");
 
-	JCheckBox chkITC= new JCheckBox("PRESSURE");
+	JCheckBox chkITC= new JCheckBox("PRESSURE IN THE CHEST");
 
-	JCheckBox chkBI = new JCheckBox("HAVINESS");
+	JCheckBox chkBI = new JCheckBox("HAVINESS IN THE CHEST");
 	
 	JCheckBox chkCG = new JCheckBox("PAIN WITH DEEP BREATHING");
 	JCheckBox chkCKS= new JCheckBox("PAIN IN THE CHEST WALL");
@@ -27,9 +28,12 @@ public class ChestArea extends JFrame implements MouseListener{
 	JCheckBox chkFP = new JCheckBox("RAPID HEART RATE ");
 	
 	JCheckBox chkLJ = new JCheckBox("FAINTING");
-	public ChestArea() {
+	
+	private String username;
+	public ChestArea(String username) {
+		this.username =username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -43,15 +47,40 @@ public class ChestArea extends JFrame implements MouseListener{
 		add(new JLabel("(You can choose one or more options.)"));
 		add(pnlHairyArea);
 		add(btnSubmit);
+		btnSubmit.addMouseListener(this);
 	}
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == btnSubmit) {
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkIB); allCheckBoxes.add(chkITC);
+			allCheckBoxes.add(chkBI); allCheckBoxes.add(chkCG);allCheckBoxes.add(chkCKS);allCheckBoxes.add(chkFP);allCheckBoxes.add(chkLJ);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+				dispose();
+			}
+		
+        } 
+		
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public ArrayList<String> getSelectedCheckBoxes() {
+        return selectedCheckBoxes;
+    }
+
 	
 	
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
 	
-		
-	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
