@@ -1,7 +1,8 @@
-package arayüzgeliþtirme;
+package main;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,14 +24,18 @@ public class Kneecap extends JFrame implements MouseListener {
 	JCheckBox chkBI = new JCheckBox("PAIN WORSENS WITH ACTIVITIES");
 	
 	JCheckBox chkCG = new JCheckBox("STIFNESS IN KNEE");
-	JCheckBox chkCKS= new JCheckBox("");
+	JCheckBox chkCKS= new JCheckBox("SWELLING IN KNEE");
 
-	JCheckBox chkFP = new JCheckBox("");
+	JCheckBox chkFP = new JCheckBox("PAIN AND ACHING IN THE KNEE");
 	
 	JCheckBox chkLJ = new JCheckBox("");
-	public Kneecap() {
+	private String username;
+	
+	public Kneecap(String username) {
+		
+		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -44,15 +49,38 @@ public class Kneecap extends JFrame implements MouseListener {
 		add(new JLabel("(You can choose one or more options.)"));
 		add(pnlHairyArea);
 		add(btnSubmit);
+		btnSubmit.addMouseListener(this);
 	
 	
 	
 	}
+
+	ArrayList<String> selectedCheckBoxes = new ArrayList<>();
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		if (e.getSource() == btnSubmit) {
+			ArrayList<JCheckBox> allCheckBoxes = new ArrayList<>();
+			allCheckBoxes.add(chkIB); allCheckBoxes.add(chkITC);
+			allCheckBoxes.add(chkBI); allCheckBoxes.add(chkCG);allCheckBoxes.add(chkCKS);allCheckBoxes.add(chkFP);allCheckBoxes.add(chkLJ);
+			for (JCheckBox jCheckBox : allCheckBoxes) {
+				if (jCheckBox.isSelected()) {
+					selectedCheckBoxes.add(jCheckBox.getText());
+				}
+			}
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+				dispose();
+			}
+		
+        } 
+		
 		// TODO Auto-generated method stub
 		
 	}
+	public ArrayList<String> getSelectedCheckBoxes() {
+        return selectedCheckBoxes;
+    }
 
 	@Override
 	public void mousePressed(MouseEvent e) {
