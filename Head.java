@@ -23,7 +23,7 @@ public class Head extends JFrame implements MouseListener{
 		
 		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -36,6 +36,8 @@ public class Head extends JFrame implements MouseListener{
 		add(btnEye);
 		
 		btnNose.addMouseListener(this);
+		btnHairyArea.addMouseListener(this);
+		btnEye.addMouseListener(this);
 		
 		
 		
@@ -47,6 +49,8 @@ public class Head extends JFrame implements MouseListener{
 //	}
 	
 	Nose ns= new Nose(username);
+	HairyArea ha = new HairyArea(username);
+	Eye eye = new Eye(username);
 	
 
 	
@@ -55,9 +59,17 @@ public class Head extends JFrame implements MouseListener{
 		if(e.getSource() == btnNose)
 		{
 	     ns.setVisible(true);
-	     
+	     dispose();
 		}
+		if(e.getSource() == btnHairyArea) {
 		
+		 ha.setVisible(true);
+		 dispose();
+	    }
+		if(e.getSource() == btnEye) {
+			eye.setVisible(true);
+			dispose();
+		}
 	}
 
 	@Override
