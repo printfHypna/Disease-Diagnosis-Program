@@ -46,6 +46,25 @@ class DiseaseTree {
 
         return current;
     }
+     	// Disease description
+    public String getDiseaseDescription(String diseaseName) {
+        return getDiseaseDescriptionRecursive(root, diseaseName);
+    }
+
+    private String getDiseaseDescriptionRecursive(DiseaseNode current, String diseaseName) {
+        if (current == null) {
+            return null;
+        }
+
+        int comparison = diseaseName.compareToIgnoreCase(current.disease);
+        if (comparison == 0) {
+            return current.diseasedesc;
+        } else if (comparison < 0) {
+            return getDiseaseDescriptionRecursive(current.left, diseaseName);
+        } else {
+            return getDiseaseDescriptionRecursive(current.right, diseaseName);
+        }
+    }
     
     public ArrayList<String> searchBySymptoms(ArrayList<String> symptoms) {
         ArrayList<String> diseases = new ArrayList<>();
