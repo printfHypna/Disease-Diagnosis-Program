@@ -29,7 +29,7 @@ public class Results extends JFrame implements MouseListener{
 		this.username = username;
 		this.selectedCheckBoxes = selectedCheckBoxes;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
 		setLayout(new BorderLayout());
@@ -335,7 +335,6 @@ public class Results extends JFrame implements MouseListener{
 			String diseaseDesc = tree.getDiseaseDescription(selectedDisease);
 			DiseaseDetailsWindow ddw = new DiseaseDetailsWindow(diseaseDesc);
 			ddw.setVisible(true);
-			dispose();
 		}
 		
 	}
