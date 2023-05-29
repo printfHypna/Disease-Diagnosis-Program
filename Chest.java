@@ -12,13 +12,14 @@ import javax.swing.JTextField;
 public class Chest extends JFrame implements MouseListener {
 	JTextField txtCA = new JTextField();
 	JTextField txtCa = new JTextField();
-	JButton btnChest = new JButton("CHEST");
-	JButton btnChestARea = new JButton("CHEST AREA");
+	JButton btnChestt = new JButton("CHEST");
+	JButton btnChestArea = new JButton("CHEST AREA");
 	
+	private String username;
 	
-	public Chest() {
+	public Chest(String username) {
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -26,19 +27,28 @@ public class Chest extends JFrame implements MouseListener {
 		setLayout(new GridLayout(4,1)); 
 		add(new JLabel("CHOOSE THE AREA WHERE YOU FEEL PAIN"));
 		add(new JLabel("CHEST AREA"));
-		add(btnChest);
-		add(btnChestARea);
-		
-		
+		add(btnChestt);
+		add(btnChestArea);
+		btnChestt.addMouseListener(this);
+		btnChestArea.addMouseListener(this);
 		
 		
 	}
 
-	
-	
+	ChestArea ch= new ChestArea(username);
+	Chestt chs= new Chestt(username);
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource() == btnChestt)
+		{
+	     chs.setVisible(true);
+	     dispose();
+		}
+		else if(e.getSource() == btnChestArea)
+		{
+	     ch.setVisible(true);
+	     dispose();
+		}
 		
 	}
 
