@@ -13,7 +13,7 @@ class Node {
         this.next = null;
     }
 }
-// Kullanıcı ismi ve semptomları bu linked listte depolanacak
+
 class LinkedList {
     private Node head;
     private Node tail;
