@@ -52,16 +52,20 @@ class DiseaseTree {
         searchBySymptomsRecursive(root, symptoms, diseases);
         return diseases;
     }
-
+    
     private void searchBySymptomsRecursive(DiseaseNode current, ArrayList<String> symptoms, ArrayList<String> diseases) {
         if (current != null) {
             searchBySymptomsRecursive(current.left, symptoms, diseases);
-            if (current.symptoms.containsAll(symptoms)) {
-                diseases.add(current.disease);
+            for (String symptom : symptoms) {
+                if (current.symptoms.contains(symptom)) {
+                    diseases.add(current.disease);
+                    break;
+                }
             }
             searchBySymptomsRecursive(current.right, symptoms, diseases);
         }
     }
+
 
     public void displayInOrder() {
         displayInOrderRecursive(root);
