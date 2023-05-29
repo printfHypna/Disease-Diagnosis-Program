@@ -1,4 +1,4 @@
-package arayüzgeliştirme;
+package main;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -36,7 +36,7 @@ public class HairyArea extends JFrame implements MouseListener {
 	public HairyArea(String username) {
 		this.username = username;
 		setDefaultCloseOperation(HIDE_ON_CLOSE);
-		setSize(400,700);
+		setSize(600,700);
 		
 		setLocationRelativeTo(null);
 		setTitle("Disease Diagnosis Program");
@@ -68,8 +68,11 @@ public class HairyArea extends JFrame implements MouseListener {
 					selectedCheckBoxes.add(jCheckBox.getText());
 				}
 			}
-			Results r = new Results(username, selectedCheckBoxes);
-			r.setVisible(true);
+			if(selectedCheckBoxes.isEmpty() == false) {
+				Results r = new Results(username, selectedCheckBoxes);
+				r.setVisible(true);
+				dispose();
+			}
 		
         } 
 		
